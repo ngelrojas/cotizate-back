@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -42,9 +41,13 @@ class NewsPrivate(viewsets.ModelViewSet):
 
     def update(self, request, pk=None):
         try:
-            current_news = News.objects.get(id=request.data.get('pk'))
-            print(current_news.campaing.id)
-            current_camp = Campaing.objects.get(user=request.user, id=current_news.campaing.id)
+            current_news = News.objects.get(
+                    id=request.data.get('pk')
+            )
+            Campaing.objects.get(
+                    user=request.user,
+                    id=current_news.campaing.id
+            )
             serializer = self.serializer_class(
                     current_news,
                     data=request.data

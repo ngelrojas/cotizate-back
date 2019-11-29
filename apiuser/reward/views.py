@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -49,7 +48,7 @@ class RewardViewSet(viewsets.ModelViewSet):
                 )
         except Reward.DoesNotExist as err:
             return Response(
-                    {'error': "something wrong in update reward"},
+                    {'error': f"{err}"},
                     status=status.HTTP_400_BAD_REQUEST
             )
 
@@ -61,7 +60,9 @@ class RewardViewSet(viewsets.ModelViewSet):
                         status=status.HTTP_400_BAD_REQUEST
                 )
 
-            current_reward = Reward.objects.get(id=request.data.get('id'))
+            current_reward = Reward.objects.get(
+                    id=request.data.get('id')
+            )
             current_reward.delete()
             return Response(
                     {'data': 'reward deleted successufully'},
@@ -69,7 +70,7 @@ class RewardViewSet(viewsets.ModelViewSet):
             )
         except Reward.DoesNotExist as err:
             return Response(
-                    {'error': 'something wrong.'},
+                    {'error': f'{err}'},
                     status=status.HTTP_400_BAD_REQUEST
             )
 

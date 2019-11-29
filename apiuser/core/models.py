@@ -196,6 +196,10 @@ class Reward(models.Model):
             on_delete=models.CASCADE,
             related_name='campaing_reward'
     )
+    currencies = models.ForeignKey(
+            Currency,
+            on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return self.campaing.title
@@ -215,7 +219,14 @@ class Payment(models.Model):
     )
 
     name = models.CharField(max_length=255)
-    campaing = models.ForeignKey(Campaing, on_delete=models.CASCADE)
+    campaing = models.ForeignKey(
+            Campaing,
+            on_delete=models.CASCADE
+    )
+    currencies = models.ForeignKey(
+            Currency,
+            on_delete=models.CASCADE
+    )
     reward = models.ForeignKey(Reward, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     type_payment = models.IntegerField(choices=TYPE_PAYMENT, default=1)

@@ -91,11 +91,16 @@ class PasswordRecoveryConfirm(generics.UpdateAPIView):
 
     def put(self, request, *args):
         """recovery password done"""
-        serializer = PasswordRecoveryConfirmSerializer(data=request.data, partial=True)
+        serializer = PasswordRecoveryConfirmSerializer(
+                data=request.data,
+                partial=True
+        )
         if serializer.is_valid():
             user_id_uid = decode_user_id(request.data.get('uid'))
             current_user = get_object_or_404(User, id=user_id_uid)
             current_user.set_password(request.data.get('password'))
             current_user.save()
-            return Response({'successfuly': 'Password recovery successfuly'})
+            return Response(
+                    {'successfuly': 'Password recovery successfuly'}
+            )
         return Response({'error': serializer.errors})

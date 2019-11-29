@@ -11,8 +11,7 @@ class CategoryViewSet(
         viewsets.GenericViewSet,
         mixins.ListModelMixin,
         mixins.CreateModelMixin,
-        mixins.DestroyModelMixin
-    ):
+        mixins.DestroyModelMixin):
     """
     list:
         show all categories
@@ -34,12 +33,12 @@ class CategoryViewSet(
         return self.queryset.all().order_by('-name')
 
     def retrieve(self, request, pk):
-       queryset = CategoryCampaing.objects.all()
-       current_category = get_object_or_404(queryset, pk=pk)
-       serializer = self.serializer_class(current_category)
-       return Response(
-               {'data': serializer.data},
-               status=status.HTTP_200_OK
+        queryset = CategoryCampaing.objects.all()
+        current_category = get_object_or_404(queryset, pk=pk)
+        serializer = self.serializer_class(current_category)
+        return Response(
+                {'data': serializer.data},
+                status=status.HTTP_200_OK
         )
 
     def create(self, request, *args, **kwargs):
@@ -86,8 +85,7 @@ class CategoryViewSet(
 
 class CategoryPublic(
         viewsets.GenericViewSet,
-        mixins.ListModelMixin
-    ):
+        mixins.ListModelMixin):
     """
     list:
         display all categories

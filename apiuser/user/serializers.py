@@ -29,8 +29,7 @@ class UserSerializer(serializers.ModelSerializer):
                 'photo',
         )
         extra_kwargs = {
-                'password': {'write_only': True,
-                    'min_length': 5}
+                'password': {'write_only': True, 'min_length': 5}
         }
 
     def create(self, validate_data):
@@ -107,7 +106,7 @@ class ActivationAccountSerializer(serializers.Serializer):
 
 class PasswordRecoverySerializer(serializers.Serializer):
     """serializer to recovery password"""
-    email = fields.EmailField(validators=[EmailValidator(),])
+    email = fields.EmailField(validators=[EmailValidator(), ])
 
     def create(self, validated_data):
         """send email to recovery password"""

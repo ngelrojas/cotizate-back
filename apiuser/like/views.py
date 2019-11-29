@@ -1,9 +1,8 @@
-from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from core.models import User, Like
+from core.models import Like
 from like import serializers
 
 
@@ -38,8 +37,13 @@ class LikeViewSet(viewsets.ModelViewSet):
 
     def update(self, request, pk=None):
         try:
-            current_like = Like.objects.get(id=request.data.get('id'))
-            serializer = self.serializer_class(current_like, data=request.data)
+            current_like = Like.objects.get(
+                    id=request.data.get('id')
+            )
+            serializer = self.serializer_class(
+                    current_like,
+                    data=request.data
+            )
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
                 return Response(
@@ -48,6 +52,6 @@ class LikeViewSet(viewsets.ModelViewSet):
                 )
         except Like.DoesNotExist as err:
             return Response(
-                    {'error': 'something wrong.'},
+                    {'error': f'{err}'},
                     status=status.HTTP_404_NOT_FOUND
             )

@@ -130,7 +130,8 @@ class Command(BaseCommand):
                     delivery_data='2020-02-20 12:45',
                     delivery_place='somewhere',
                     description='somewhere',
-                    campaing=campaing_1
+                    campaing=campaing_1,
+                    currencies=currency_one
             )
             reward_two = Reward.objects.create(
                     title='reward camp 1',
@@ -138,7 +139,8 @@ class Command(BaseCommand):
                     delivery_data='2020-05-20 12:45',
                     delivery_place='somewhere',
                     description='somewhere',
-                    campaing=campaing_1
+                    campaing=campaing_1,
+                    currencies=currency_one
             )
             reward_three = Reward.objects.create(
                     title='reward camp 2',
@@ -146,7 +148,8 @@ class Command(BaseCommand):
                     delivery_data='2020-06-22 12:45',
                     delivery_place='somewhere',
                     description='somewhere',
-                    campaing=campaing_2
+                    campaing=campaing_2,
+                    currencies=currency_one
             )
 
             reward_four = Reward.objects.create(
@@ -155,7 +158,8 @@ class Command(BaseCommand):
                     delivery_data='2020-07-21 12:45',
                     delivery_place='somewhere',
                     description='somewhere',
-                    campaing=campaing_2
+                    campaing=campaing_2,
+                    currencies=currency_one
             )
 
             self.success('rewards created.')
@@ -168,7 +172,8 @@ class Command(BaseCommand):
                    user=user_contributor_1,
                    type_payment=1,
                    status_payment=3,
-                   budget_partial=reward_one.price
+                   budget_partial=reward_one.price,
+                   currencies=currency_one
             )
             payment_two = Payment.objects.create(
                    name='paypal',
@@ -177,7 +182,8 @@ class Command(BaseCommand):
                    user=user_contributor_1,
                    type_payment=1,
                    status_payment=3,
-                   budget_partial=reward_two.price
+                   budget_partial=reward_two.price,
+                   currencies=currency_one
             )
             payment_three = Payment.objects.create(
                    name='paypal',
@@ -186,7 +192,8 @@ class Command(BaseCommand):
                    user=user_contributor_1,
                    type_payment=1,
                    status_payment=2,
-                   budget_partial=reward_three.price
+                   budget_partial=reward_three.price,
+                   currencies=currency_one
             )
             self.success('payment created.')
             """news related a campaing"""
