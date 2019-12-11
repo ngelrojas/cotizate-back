@@ -32,7 +32,7 @@ class LikeViewSet(viewsets.ModelViewSet):
             status=status.HTTP_200_OK
         )
 
-        def perform_create(self, serializer):
+    def perform_create(self, serializer):
             return serializer.save(owner=self.request.user)
 
     def update(self, request, pk=None):
