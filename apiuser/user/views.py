@@ -16,13 +16,6 @@ class CreateUserView(generics.CreateAPIView):
     """create a new user in the system"""
     serializer_class = UserSerializer
 
-    def create(self, request, *args, **kwargs):
-        serializer = self.serializer_class()
-        return Response(
-                {'data': 'user registered'},
-                status=status.HTTP_201_CREATED
-        )
-
 
 class CreateTokenView(ObtainAuthToken):
     """create a new auth token for user"""
