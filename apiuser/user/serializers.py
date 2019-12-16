@@ -80,6 +80,11 @@ class AuthTokenSerializer(serializers.Serializer):
             trim_whitespace=False
     )
 
+    class Meta:
+        model = get_user_model
+        fileds = ('id', 'name', 'last_name',)
+        depth = 1
+
     def validate(self, attrs):
         """validate and authenticate the user"""
         email = attrs.get('email')
@@ -96,6 +101,7 @@ class AuthTokenSerializer(serializers.Serializer):
             raise serializers.ValidationError(msg, code='authentication')
 
         attrs['user'] = user
+
         return attrs
 
 

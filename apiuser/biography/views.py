@@ -38,12 +38,14 @@ class BiographyView(viewsets.ViewSet):
                     current_user,
                     data=request.data
             )
+
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
                 return Response(
                         {'data': "biography updated sucessfuly"},
                         status=status.HTTP_200_OK
                 )
+
         except Biography.DoesNotExist as err:
             return Response(
                     {'error': f"{err}"},
