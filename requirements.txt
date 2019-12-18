@@ -7,7 +7,7 @@ celery
 django-smtp-ssl
 amqp==2.5.1
 django-rest-swagger
-django-cors-headers==2.5.3
+django-cors-headers==2.2.0
 kombu==4.6.5
 django-model-utils
 django-autoslug
