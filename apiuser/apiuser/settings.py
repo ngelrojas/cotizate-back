@@ -162,7 +162,7 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'core.User'
 # URL_PRODUCTION = 'http://www.cotizate.com'
-URL_PRODUCTION = 'http://127.0.0.1:8000'
+URL_PRODUCTION = 'http://localhost:3000'
 
 # CORS AND STUFF
 CORS_ALLOW_CREDENTIALS = False
