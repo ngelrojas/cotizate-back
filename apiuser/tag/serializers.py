@@ -8,7 +8,3 @@ class TagCampaingSerializer(serializers.ModelSerializer):
     class Meta:
         model = TagCampaing
         fields = ('id', 'name',)
-        read_only_fields = ('id',)
-
-    def create(self, validated_data):
-        return TagCampaing.objects.create(**validated_data)

@@ -22,9 +22,11 @@ X_FRAME_OPTIONS = 'Deny'
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'eln()fnf+=%rzvk5#ossqurm$9^*b_u_b3ho)9@u3oyzi6)i@o'
+# SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -42,7 +44,7 @@ APPS_LOCAL = [
 APPS_THIRDPARTY = [
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_framework_swagger',
+    'drf_yasg',
     'corsheaders',
 ]
 
@@ -159,7 +161,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/staticfiles/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 AUTH_USER_MODEL = 'core.User'
 # URL_PRODUCTION = 'http://www.cotizate.com'
 URL_PRODUCTION = 'http://localhost:3000'

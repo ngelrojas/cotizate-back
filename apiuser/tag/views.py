@@ -35,15 +35,8 @@ class TagViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_200_OK
         )
 
-    def create(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(
-                    {'data': 'tag created successfully.'},
-                    status=status.HTTP_200_OK
-            )
-        return Response({'error': serializer.errors})
+    def perform_create(self, serializer):
+        return serializer.save()
 
     def destroy(self, request, *args, **kwargs):
         instance_tag = TagCampaing.objects.get(name=request.data.get('name'))

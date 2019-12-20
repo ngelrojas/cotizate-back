@@ -1,18 +1,11 @@
 from rest_framework import serializers
 from core.models import CategoryCampaing, Campaing
-from core.models import TagCampaing
-
-
-class TagPublicSerializer(serializers.ModelSerializer):
-    """serializer tag public"""
-    class Meta:
-        model = TagCampaing
-        fields = ('id', 'name')
+from tag.serializers import TagCampaingSerializer
 
 
 class CampaingPublicSerializer(serializers.ModelSerializer):
     """serializer campaing public"""
-    tags = TagPublicSerializer(many=True, read_only=True)
+    tags = TagCampaingSerializer(many=True, read_only=True)
 
     class Meta:
         model = Campaing
