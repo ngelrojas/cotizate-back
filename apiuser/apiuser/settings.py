@@ -163,8 +163,8 @@ USE_TZ = True
 STATIC_URL = '/staticfiles/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 AUTH_USER_MODEL = 'core.User'
-# URL_PRODUCTION = 'http://www.cotizate.com'
-URL_PRODUCTION = 'http://localhost:3000'
+URL_PRODUCTION = 'http://www.cotizate.com'
+# URL_PRODUCTION = 'http://localhost:3000'
 
 # CORS AND STUFF
 CORS_ALLOW_CREDENTIALS = False
@@ -173,18 +173,18 @@ CORS_ALLOW_METHODS = list(default_methods)
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
-    "http://192.168.1.5:3000",
+    "http://54.225.32.34:8000",
 ]
 
 CORS_ORIGIN_REGEX_WHITELIST = (
     'http://localhost:3000',
-    'http://192.168.1.5:3000',
+    "http://54.225.32.34:8000",
 )
 CSRF_COOKIE_NAME = 'csrftoken'
 
 CSRF_TRUSTED_ORIGINS = (
     'localhost:3000',
-    '192.168.1.5:3000',
+    "http://54.225.32.34:8000",
 )
 
 CORS_ALLOW_HEADERS = default_headers + (
