@@ -40,7 +40,7 @@ class UserSerializer(serializers.ModelSerializer):
         token = make_user_token(user_instance)
         email_context = {
                 'fullname': '{}'.format(validate_data['name']),
-                'domain': f'{settings.URL_PRODUCTION}/activation-account',
+                'domain': f'{settings.URL_PRODUCTION}/#/activation-account',
                 'uid': uid,
                 'token': token
         }
@@ -119,7 +119,7 @@ class PasswordRecoverySerializer(serializers.Serializer):
         user = get_object_or_404(User, email=validated_data.get('email'))
         email_context = {
                 'name': '{}'.format(user.name),
-                'domain': f'{settings.URL_PRODUCTION}/recovery-password',
+                'domain': f'{settings.URL_PRODUCTION}/#/recovery-password',
                 'uid': encode_user_id(user.id),
                 'token': make_user_token(user),
         }
