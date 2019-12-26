@@ -9,6 +9,20 @@ from core.tokens import encode_user_id, make_user_token
 from core.models import CodeActivation, User
 
 
+class UserSerializerRetrieve(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = (
+                'email',
+                'name',
+                'last_name',
+                'dni',
+                'cellphone',
+                'address',
+                'photo',
+        )
+
+
 class UserSerializer(serializers.ModelSerializer):
     """serialzier for the users object"""
     last_name = serializers.CharField(required=True, max_length=255)
@@ -20,7 +34,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = get_user_model()
         fields = (
                 'email',
-                'password',
+                # 'password',
                 'name',
                 'last_name',
                 'dni',

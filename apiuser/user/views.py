@@ -1,10 +1,11 @@
 from rest_framework import generics, authentication
-from rest_framework import permissions, status
+from rest_framework import permissions, status, viewsets
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 from rest_framework.response import Response
 from rest_framework.generics import get_object_or_404
 from user.serializers import UserSerializer, AuthTokenSerializer
+from user.serializers import UserSerializerRetrieve
 from user.serializers import ActivationAccountSerializer
 from user.serializers import PasswordRecoverySerializer
 from user.serializers import PasswordRecoveryConfirmSerializer
@@ -23,15 +24,40 @@ class CreateTokenView(ObtainAuthToken):
     render_classes = api_settings.DEFAULT_RENDERER_CLASSES
 
 
-class ManageUserView(generics.RetrieveUpdateAPIView):
+class ManageUserView(viewsets.ModelViewSet):
     """manage the authenticated user"""
     serializer_class = UserSerializer
+    serializer_class_re = UserSerializerRetrieve
     authentication_classes = (authentication.TokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
+    queryset = User.objects.all()
 
-    def get_object(self):
-        """retrieve and return authentication user"""
-        return self.request.user
+    # def get_object(self):
+        # """retrieve and return authentication user"""
+        # return self.request.user
+
+    def retrieve(self, request, pk=None):
+        queryset = User.objects.get(id=request.user.id)
+        serializer = self.serializer_class_re(queryset)
+        return Response(serializer.data)
+
+    def update(self, request, *args, **kwargs):
+        try:
+            serializer = self.serializer_class(
+                request.user,
+                data=request.data
+            )
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(
+                    {'data': 'current user updated'},
+                    status=status.HTTP_200_OK
+                )
+        except User.DoesNotExist as err:
+            return Response(
+                {'error': f"{err}"},
+                status=status.HTTP_404_NOT_FOUND
+            )
 
 
 class ActivationAccount(generics.UpdateAPIView):
