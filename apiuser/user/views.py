@@ -4,6 +4,7 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 from rest_framework.response import Response
 from rest_framework.generics import get_object_or_404
+from rest_framework.authentication import TokenAuthentication
 from user.serializers import UserSerializer, AuthTokenSerializer
 from user.serializers import UserSerializerRetrieve
 from user.serializers import ActivationAccountSerializer
@@ -130,3 +131,30 @@ class PasswordRecoveryConfirm(generics.UpdateAPIView):
                     {'successfuly': 'Password recovery successfuly'}
             )
         return Response({'error': serializer.errors})
+
+
+class PasswordUpdate(viewsets.ModelViewSet):
+    serializer_class = PasswordRecoveryConfirmSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = ''
+
+    def update(self, request, pk=None):
+
+        password = request.data.get('password')
+        password_confirm = request.data.get('password_confirm')
+
+        if password != password_confirm:
+            return Response(
+                {'error': "Those passwords don't match."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        current_user = User.objects.get(id=request.user.id)        
+        current_user.set_password(request.data.get('password'))
+        current_user.save()
+
+        return Response(
+            {'data': 'password updated.'},
+            status=status.HTTP_200_OK
+        )

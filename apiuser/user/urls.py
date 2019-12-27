@@ -29,4 +29,10 @@ urlpatterns = [
         'put': 'update'}),
         name='biography'
     ),
+    path('me/password-update/', 
+        views.PasswordUpdate.as_view({
+            'put': 'update'
+        }),
+        name='password-update'
+    ),
 ]
