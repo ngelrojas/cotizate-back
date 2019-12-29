@@ -35,4 +35,10 @@ urlpatterns = [
         }),
         name='password-update'
     ),
+    path('biography/complete-bio/', 
+        view_bio.BiographyComplete.as_view({
+            'get': 'retrieve'
+        }),
+        name='complete-biography'
+    ),
 ]

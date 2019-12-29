@@ -108,7 +108,7 @@ class BiographySerializer(serializers.ModelSerializer):
                 instance.company_logo
         )
         instance.company_description = validated_data.get(
-                'compnay_description',
+                'company_description',
                 instance.company_description
         )
         instance.company_facebook = validated_data.get(
@@ -131,3 +131,10 @@ class BiographySerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
+
+
+class BiographyCompleteSerializer(serializers.ModelSerializer):
+
+        class Meta:
+                model = Biography
+                fields = ('is_complete',)
