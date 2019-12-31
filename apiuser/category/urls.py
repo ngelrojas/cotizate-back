@@ -24,5 +24,9 @@ urlpatterns = [
         path('category/<slug:name>', views.CategoryPublic.as_view({
             'get': 'retrieve'}),
             name='category-campaing'
-        )
+        ),
+        path('category/public/general', views.CategoryPublicGeneral.as_view({
+            'get': 'list'
+        }),
+        name='category-public-general')
 ]

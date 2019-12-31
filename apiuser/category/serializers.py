@@ -52,3 +52,10 @@ class CategoryPublicSerializer(serializers.ModelSerializer):
         depth = 1
         model = CategoryCampaing
         fields = ('id', 'name', 'campaing',)
+
+
+class CategoryPublicGeneral(serializers.ModelSerializer):
+
+    class Meta:
+        model = CategoryCampaing
+        fields = ('id', 'name',)

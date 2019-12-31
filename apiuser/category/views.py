@@ -105,3 +105,13 @@ class CategoryPublic(
                 {'data': serializer.data},
                 status=status.HTTP_200_OK
         )
+
+
+class CategoryPublicGeneral(
+        viewsets.GenericViewSet,
+        mixins.ListModelMixin):
+        serializer_class = serializers.CategoryPublicGeneral
+        queryset = CategoryCampaing.objects.all()
+
+        def get_queryset(self):
+            return self.queryset.order_by('name')
