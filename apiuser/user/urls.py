@@ -10,7 +10,7 @@ urlpatterns = [
     path('token/', views.CreateTokenView.as_view(), name='token'),
     path('me/', views.ManageUserView.as_view({
         'get': 'retrieve',
-        'put': 'update'
+        'patch': 'partial_update'
     }), name='me'),
     re_path(
         r'^activate/(?P<uid>[0-9A-Za-z_\-]+)/' +

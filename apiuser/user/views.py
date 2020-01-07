@@ -42,11 +42,12 @@ class ManageUserView(viewsets.ModelViewSet):
         serializer = self.serializer_class_re(queryset)
         return Response(serializer.data)
 
-    def update(self, request, *args, **kwargs):
+    def partial_update(self, request, *args, **kwargs):
         try:
-            serializer = self.serializer_class(
+            serializer = self.serializer_class_re(
                 request.user,
-                data=request.data
+                data=request.data,
+                partial=True
             )
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
@@ -68,6 +69,7 @@ class ActivationAccount(generics.UpdateAPIView):
         and create profile current user.
     """
     serializer_class = ActivationAccountSerializer
+    queryset = ''
 
     def update(self, request, *args, **kwargs):
         """
