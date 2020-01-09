@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from django.db import transaction
 from core.models import CategoryCampaing, TagCampaing
 from core.models import Campaing, Like, News
+from core.models import CampaingComplement
 from core.models import Reward, Payment, User
 from core.models import Comment, SubComment, Currency
 
@@ -31,6 +32,11 @@ class Command(BaseCommand):
         )
 
         with transaction.atomic():
+            """ create categories"""
+            category_1 = CategoryCampaing.objects.get(name="Technology")
+            category_2 = CategoryCampaing.objects.get(name="Arts")
+            category_3 = CategoryCampaing.objects.get(name="Music")
+            self.success('categories created.')
             """get users"""
             user_creator_1 = User.objects.get(email='jhondoe@yopmail.com')
             user_creator_2 = User.objects.get(email='merydoe@yopmail.com')
@@ -48,6 +54,7 @@ class Command(BaseCommand):
                     name='clojure'
             )
             self.success('tags created')
+
             """create campaing"""
             campaing_1 = Campaing.objects.create(
                    title='first campaing',
@@ -60,50 +67,49 @@ class Command(BaseCommand):
                    linkedin='linkedin.com/first1',
                    instagram='instagram.com/first1',
                    website='first1.com',
+                   currency=currency_one,
+                   user=user_creator_1
+            )
+            campaing_1.category.add(category_1, category_2)
+
+            campaing_1_1 = CampaingComplement.objects.create(
+                   campaing=campaing_1,
                    video='https://www.youtube.com/watch?v=DCCDKQH7BmA',
-                   excerpt='this is a excerpt for this campaibng.',
+                   excerpt='this is a excerpt for this campaing.',
                    description='this is a lot description for this campaing',
                    public_at='2020-12-03 12:52:00',
                    status_campaing=1,
-                   is_complete=False,
-                   user=user_creator_1,
-                   currencies=currency_one
+                   is_complete=False
             )
-            campaing_1.tags.add(tag_1, tag_3)
+            campaing_1_1.tags.add(tag_1, tag_3)
+
             campaing_2 = Campaing.objects.create(
-                   title='second campaing',
-                   slug='second-campaing',
-                   city='la paz',
-                   budget=300,
+                   title='first campaing',
+                   slug='first-campaing',
+                   city='santa cruz',
+                   budget=100,
                    qty_days=50,
-                   facebook='facebook.com/firts2',
-                   twitter='twitter.com/first2',
-                   linkedin='linkedin.com/first2',
-                   instagram='instagram.com/first2',
+                   facebook='facebook.com/firts1',
+                   twitter='twitter.com/first1',
+                   linkedin='linkedin.com/first1',
+                   instagram='instagram.com/first1',
                    website='first2.com',
+                   currency=currency_one,
+                   user=user_creator_2
+            )
+            campaing_2.category.add(category_2, category_3)
+
+            campaing_2_1 = CampaingComplement.objects.create(
+                   campaing=campaing_2,
                    video='https://www.youtube.com/watch?v=DCCDKQH7BmA',
-                   excerpt='this is a excerpt for this campaibng.',
+                   excerpt='this is a excerpt for this campaing.',
                    description='this is a lot description for this campaing',
-                   public_at='2020-10-05 12:52:00',
+                   public_at='2020-12-03 12:52:00',
                    status_campaing=1,
-                   is_complete=False,
-                   user=user_creator_2,
-                   currencies=currency_one
+                   is_complete=False
             )
-            campaing_2.tags.add(tag_2, tag_1)
+            campaing_2_1.tags.add(tag_1, tag_3)
             self.success('campaing created.')
-            """create category"""
-            category_1 = CategoryCampaing.objects.create(
-                    name='technology'
-            )
-            category_1.campaing.add(campaing_1)
-
-            category_2 = CategoryCampaing.objects.create(
-                    name='nature'
-            )
-            category_2.campaing.add(campaing_2)
-
-            self.success('categories created.')
 
             """create likes"""
             like_one = Like.objects.create(
