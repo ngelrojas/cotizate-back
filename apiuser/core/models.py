@@ -99,6 +99,13 @@ class Biography(models.Model):
         return self.user.get_full_name()
 
 
+class CategoryCampaing(models.Model):
+    name = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
 class TagCampaing(models.Model):
     name = models.CharField(max_length=255, blank=True)
 
@@ -122,13 +129,6 @@ class CategoryCampaing(models.Model):
 
 
 class Campaing(models.Model):
-    STATUS_CAMPAING = (
-            (0, 'begin'),
-            (1, 'created'),
-            (2, 'revision'),
-            (3, 'public'),
-            (4, 'completed')
-    )
     title = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='title', always_update=True)
     city = models.CharField(max_length=255)
@@ -139,6 +139,34 @@ class Campaing(models.Model):
     linkedin = models.CharField(max_length=255, blank=True)
     instagram = models.CharField(max_length=255, blank=True)
     website = models.CharField(max_length=255, blank=True)
+    user = models.ForeignKey(
+            settings.AUTH_USER_MODEL,
+            on_delete=models.CASCADE,
+            related_name='user_campaing'
+    )
+    currency = models.ForeignKey(
+            Currency,
+            on_delete=models.CASCADE
+    )
+    category = models.ForeignKey(
+            CategoryCampaing,
+            on_delete=models.CASCADE
+    )
+
+
+    def __str__(self):
+        return self.title + ' by  ' + self.user.get_full_name()
+
+
+class CampaingComplement(models.Model):
+    """campaing complementery"""
+    STATUS_CAMPAING = (
+        (0, 'begin'),
+        (1, 'created'),
+        (2, 'revision'),
+        (3, 'public'),
+        (4, 'completed')
+    )
     video = models.CharField(max_length=255, blank=True)
     excerpt = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)
@@ -150,25 +178,17 @@ class Campaing(models.Model):
     status_campaing = models.IntegerField(choices=STATUS_CAMPAING, default=1)
     is_enabled = models.BooleanField(default=False)
     is_complete = models.BooleanField(default=False)
-    user = models.ForeignKey(
-            settings.AUTH_USER_MODEL,
-            on_delete=models.CASCADE,
-            related_name='user_campaing'
-    )
-    tags = models.ManyToManyField(
-            TagCampaing
-    )
-    currencies = models.ForeignKey(
-            Currency,
+    campaing = models.ForeignKey(
+            Campaing,
             on_delete=models.CASCADE
     )
-    category = models.ForeignKey(
-            CategoryCampaing,
+    tags = models.ForeignKey(
+            TagCampaing,
             on_delete=models.CASCADE
     )
 
     def __str__(self):
-        return self.title + ' by  ' + self.user.get_full_name()
+        return self.campaing.title
 
 
 class Reward(models.Model):
@@ -195,7 +215,7 @@ class Reward(models.Model):
             on_delete=models.CASCADE,
             related_name='campaing_reward'
     )
-    currencies = models.ForeignKey(
+    currency = models.ForeignKey(
             Currency,
             on_delete=models.CASCADE
     )
