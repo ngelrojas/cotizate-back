@@ -31,6 +31,9 @@ class Command(BaseCommand):
         )
 
         with transaction.atomic():
+            """get a categories"""
+            category_1 = CategoryCampaing.objects.get(name='Art')
+            category_2 = CategoryCampaing.objects.get(name='Technology')
             """get users"""
             user_creator_1 = User.objects.get(email='jhondoe@yopmail.com')
             user_creator_2 = User.objects.get(email='merydoe@yopmail.com')
@@ -67,7 +70,8 @@ class Command(BaseCommand):
                    status_campaing=1,
                    is_complete=False,
                    user=user_creator_1,
-                   currencies=currency_one
+                   currencies=currency_one,
+                   category=category_1
             )
             campaing_1.tags.add(tag_1, tag_3)
             campaing_2 = Campaing.objects.create(
@@ -88,22 +92,11 @@ class Command(BaseCommand):
                    status_campaing=1,
                    is_complete=False,
                    user=user_creator_2,
-                   currencies=currency_one
+                   currencies=currency_one,
+                   category=category_2
             )
             campaing_2.tags.add(tag_2, tag_1)
             self.success('campaing created.')
-            """create category"""
-            category_1 = CategoryCampaing.objects.create(
-                    name='technology'
-            )
-            category_1.campaing.add(campaing_1)
-
-            category_2 = CategoryCampaing.objects.create(
-                    name='nature'
-            )
-            category_2.campaing.add(campaing_2)
-
-            self.success('categories created.')
 
             """create likes"""
             like_one = Like.objects.create(

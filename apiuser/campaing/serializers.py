@@ -39,6 +39,7 @@ class CampaingListSerializer(serializers.ModelSerializer):
                 'is_enabled',
                 'tags',
                 'currencies',
+                'category',
         )
 
 
@@ -83,6 +84,7 @@ class CampaingSerializer(serializers.ModelSerializer):
                 'updated_at',
                 'is_enabled',
                 'tags',
+                'category',
         )
 
         read_only_fields = ('id',)
@@ -111,6 +113,7 @@ class CampaingSerializerPublic(serializers.ModelSerializer):
                 'description',
                 'tags',
                 'currencies',
+                'category',
         )
 
         read_only_fields = ('id',)

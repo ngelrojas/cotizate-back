@@ -114,6 +114,13 @@ class Currency(models.Model):
         return self.name
 
 
+class CategoryCampaing(models.Model):
+    name = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Campaing(models.Model):
     STATUS_CAMPAING = (
             (0, 'begin'),
@@ -155,21 +162,13 @@ class Campaing(models.Model):
             Currency,
             on_delete=models.CASCADE
     )
-
-    def __str__(self):
-        return self.title + ' by  ' + self.user.get_full_name()
-
-
-class CategoryCampaing(models.Model):
-    name = models.CharField(max_length=255, blank=True)
-    campaing = models.ManyToManyField(
-            Campaing,
-            related_name='category_campaing',
-            blank=True
+    category = models.ForeignKey(
+            CategoryCampaing,
+            on_delete=models.CASCADE
     )
 
     def __str__(self):
-        return self.name
+        return self.title + ' by  ' + self.user.get_full_name()
 
 
 class Reward(models.Model):

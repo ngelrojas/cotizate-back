@@ -15,14 +15,8 @@ class CategoryViewSet(
     """
     list:
         show all categories
-    create:
-        create a category
     retrieve:
         show a category
-    update:
-        update a category
-    destroy:
-        delete a category
     """
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
@@ -38,47 +32,6 @@ class CategoryViewSet(
         serializer = self.serializer_class(current_category)
         return Response(
                 {'data': serializer.data},
-                status=status.HTTP_200_OK
-        )
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(status=status.HTTP_201_CREATED)
-        return Response(
-                {'error': 'somthing error'},
-                status=status.HTTP_400_BAD_REQUEST
-        )
-
-    def update(self, request, pk=None):
-        try:
-            current_category = CategoryCampaing.objects.get(
-                    id=request.data.get('id')
-            )
-            serializer = self.serializer_class(
-                    current_category,
-                    data=request.data
-            )
-            if serializer.is_valid(raise_exception=True):
-                serializer.save()
-                return Response(
-                        {'data': 'category update successfully.'},
-                        status=status.HTTP_200_OK
-                )
-        except CategoryCampaing.DoesNotExist as err:
-            return Response(
-                    {'error': f'{err}'},
-                    status=status.HTTP_400_BAD_REQUEST
-            )
-
-    def destroy(self, request, *args, **kwargs):
-        instance_category = CategoryCampaing.objects.get(
-                id=request.data.get('id')
-        )
-        instance_category.delete()
-        return Response(
-                {'data': True},
                 status=status.HTTP_200_OK
         )
 
