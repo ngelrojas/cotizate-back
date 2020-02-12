@@ -121,13 +121,6 @@ class Currency(models.Model):
         return self.name
 
 
-class CategoryCampaing(models.Model):
-    name = models.CharField(max_length=255, blank=True)
-
-    def __str__(self):
-        return self.name
-
-
 class Campaing(models.Model):
     title = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='title', always_update=True)
@@ -152,7 +145,6 @@ class Campaing(models.Model):
             CategoryCampaing,
             on_delete=models.CASCADE
     )
-
 
     def __str__(self):
         return self.title + ' by  ' + self.user.get_full_name()
@@ -268,8 +260,8 @@ class Payment(models.Model):
 class Like(models.Model):
     liked = models.BooleanField(default=False)
     user = models.ForeignKey(
-            settings.AUTH_USER_MODEL,
-            on_delete=models.CASCADE
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
     )
     campaing = models.ForeignKey(Campaing, on_delete=models.CASCADE)
 
