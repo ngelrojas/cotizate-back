@@ -84,8 +84,7 @@ class Command(BaseCommand):
                    is_complete=False,
                    user=user_creator_1,
                    currencies=currency_one,
-                   category=category_1,
-                   is_complete=False
+                   category=category_1
             )
             campaing_1_1.tags.add(tag_1, tag_3)
 
@@ -115,8 +114,7 @@ class Command(BaseCommand):
                    is_complete=False, 
                    user=user_creator_2,
                    currencies=currency_one,
-                   category=category_2,
-                   is_complete=False
+                   category=category_2
             )
             campaing_2_1.tags.add(tag_1, tag_3)
             self.success('campaing created.')
