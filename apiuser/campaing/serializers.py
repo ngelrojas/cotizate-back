@@ -45,19 +45,6 @@ class CampaingListSerializer(serializers.ModelSerializer):
 
 class CampaingSerializer(serializers.ModelSerializer):
     """serializer for campaing"""
-    title = serializers.CharField(max_length=255)
-    city = serializers.CharField(max_length=255)
-    budget = serializers.FloatField(max_value=None, min_value=None)
-    qty_days = serializers.IntegerField(default=0)
-    facebook = serializers.CharField(max_length=255)
-    twitter = serializers.CharField(max_length=255)
-    linkedin = serializers.CharField(max_length=255)
-    instagram = serializers.CharField(max_length=255)
-    website = serializers.CharField(max_length=255)
-    video = serializers.CharField(max_length=255)
-    excerpt = serializers.CharField(max_length=255)
-    description = serializers.CharField(max_length=None)
-    updated_at = serializers.DateTimeField(default=now)
     tags = serializers.PrimaryKeyRelatedField(
             many=True,
             queryset=TagCampaing.objects.all()
@@ -84,6 +71,7 @@ class CampaingSerializer(serializers.ModelSerializer):
                 'updated_at',
                 'is_enabled',
                 'tags',
+                'currencies',
                 'category',
         )
 
