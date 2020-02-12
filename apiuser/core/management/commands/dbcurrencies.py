@@ -30,11 +30,11 @@ class Command(BaseCommand):
 
         with transaction.atomic():
             """create currencies"""
-            currency_one = Currency.objects.create(
+            Currency.objects.create(
                     name='Bolivianos',
                     symbol='$Bs'
             )
-            currency_two = Currency.objects.create(
+            Currency.objects.create(
                     name='Dollares EE UU',
                     symbol='$Sus'
             )
