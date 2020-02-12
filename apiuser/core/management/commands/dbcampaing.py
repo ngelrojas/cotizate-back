@@ -32,21 +32,17 @@ class Command(BaseCommand):
         )
 
         with transaction.atomic():
-<<<<<<< HEAD
+
             """get a categories"""
-            category_1 = CategoryCampaing.objects.get(name='Art')
-            category_2 = CategoryCampaing.objects.get(name='Technology')
-=======
-            """ create categories"""
             category_1 = CategoryCampaing.objects.get(name="Technology")
             category_2 = CategoryCampaing.objects.get(name="Arts")
             category_3 = CategoryCampaing.objects.get(name="Music")
             self.success('categories created.')
->>>>>>> 0bee55a94b55adafd6453d10a40faee548f2b851
+
             """get users"""
             user_creator_1 = User.objects.get(email='jhondoe@yopmail.com')
             user_creator_2 = User.objects.get(email='merydoe@yopmail.com')
-            user_contributor_1 = User.objects.get(email='maricolucas@yopmail.com')
+            user_contributor_1 = User.objects.get(email='mariolucas@yopmail.com')
             user_contributor_2 = User.objects.get(email='marinalucas@yopmail.com')
             currency_one = Currency.objects.get(name='Bolivianos')
             """create tags"""
@@ -85,14 +81,11 @@ class Command(BaseCommand):
                    description='this is a lot description for this campaing',
                    public_at='2020-12-03 12:52:00',
                    status_campaing=1,
-<<<<<<< HEAD
                    is_complete=False,
                    user=user_creator_1,
                    currencies=currency_one,
                    category=category_1
-=======
                    is_complete=False
->>>>>>> 0bee55a94b55adafd6453d10a40faee548f2b851
             )
             campaing_1_1.tags.add(tag_1, tag_3)
 
@@ -119,14 +112,11 @@ class Command(BaseCommand):
                    description='this is a lot description for this campaing',
                    public_at='2020-12-03 12:52:00',
                    status_campaing=1,
-<<<<<<< HEAD
-                   is_complete=False,
+                   is_complete=False, 
                    user=user_creator_2,
                    currencies=currency_one,
                    category=category_2
-=======
                    is_complete=False
->>>>>>> 0bee55a94b55adafd6453d10a40faee548f2b851
             )
             campaing_2_1.tags.add(tag_1, tag_3)
             self.success('campaing created.')
@@ -228,12 +218,12 @@ class Command(BaseCommand):
                     description="some description about campaing.",
                     campaing=campaing_1
             )
-            news_2= News.objects.create(
+            news_2 = News.objects.create(
                     title="some title two",
                     description="some two description about campaing.",
                     campaing=campaing_1
             )
-            news_3= News.objects.create(
+            news_3 = News.objects.create(
                     title="some title three",
                     description="some three description about campaing.",
                     campaing=campaing_1
