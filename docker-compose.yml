@@ -11,14 +11,6 @@ services:
         command: >
             sh -c "python manage.py wait_for_db && 
                     python manage.py migrate &&
-<<<<<<< HEAD
-=======
-                    python manage.py dbuser &&
-                    python manage.py dbcategories &&
-                    python manage.py dbcurrencies &&
-                    python manage.py dbcategories &&
-                    python manage.py dbcampaing &&
->>>>>>> fed701e053aaaec62c393be7c476233e72c40633
                     gunicorn apiuser.wsgi:application --bind 0.0.0.0:8000"
         environment:
             - DB_HOST=db
