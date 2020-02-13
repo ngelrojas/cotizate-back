@@ -1,8 +1,6 @@
 from django.utils.timezone import now
 from rest_framework import serializers
-from core.models import Campaing, CampaingComplement
-from core.models import Currency
-from core.models import CategoryCampaing, TagCampaing
+from core.models import Campaing, Currency, TagCampaing
 from tag.serializers import TagCampaingSerializer
 
 
@@ -16,8 +14,8 @@ class CurrencyPublicSerializer(serializers.ModelSerializer):
 
 class CampaingListSerializer(serializers.ModelSerializer):
     """serializer campaing just list"""
-    # tags = TagCampaingSerializer(many=True, read_only=True)
-    currency = CurrencyPublicSerializer()
+    tags = TagCampaingSerializer(many=True, read_only=True)
+    currencies = CurrencyPublicSerializer()
 
     class Meta:
         model = Campaing
@@ -42,7 +40,6 @@ class CampaingListSerializer(serializers.ModelSerializer):
                 'tags',
                 'currencies',
                 'category',
-                'currency',
         )
 
 
@@ -67,31 +64,12 @@ class CampaingSerializer(serializers.ModelSerializer):
                 'linkedin',
                 'instagram',
                 'website',
-                'currencies',
-                'category',
-        )
-
-        read_only_fields = ('id',)
-
-
-class CampaingCompSerializar(serializers.ModelSerializer):
-    """serializer for campaing complementary"""
-    tags = serializers.PrimaryKeyRelatedField(
-            many=True,
-            queryset=TagCampaing.objects.all()
-    )
-
-    class Meta:
-        model = CampaingComplement
-        fields = (
-                'id',
                 'video',
                 'excerpt',
                 'description',
                 'created_at',
                 'updated_at',
                 'is_enabled',
-                'campaing',
                 'tags',
                 'currencies',
                 'category',
@@ -99,10 +77,11 @@ class CampaingCompSerializar(serializers.ModelSerializer):
 
         read_only_fields = ('id',)
 
+
 class CampaingSerializerPublic(serializers.ModelSerializer):
     """campaing serializer public"""
-    # tags = TagCampaingSerializer(many=True, read_only=True)
-    currency = CurrencyPublicSerializer()
+    tags = TagCampaingSerializer(many=True, read_only=True)
+    currencies = CurrencyPublicSerializer()
 
     class Meta:
         model = Campaing
@@ -123,9 +102,6 @@ class CampaingSerializerPublic(serializers.ModelSerializer):
                 'tags',
                 'currencies',
                 'category',
-
-                'currency',
-
         )
 
         read_only_fields = ('id',)
