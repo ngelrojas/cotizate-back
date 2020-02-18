@@ -24,7 +24,8 @@ class RewardSerializer(serializers.ModelSerializer):
                 'type_reward',
                 'delivery_data',
                 'delivery_place',
-                'description',)
+                'description',
+                'currencies',)
         read_only_fields = ('id',)
 
     def update(self, instance, validated_data):
