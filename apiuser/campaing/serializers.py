@@ -2,6 +2,7 @@ from django.utils.timezone import now
 from rest_framework import serializers
 from core.models import Campaing, Currency, TagCampaing
 from tag.serializers import TagCampaingSerializer
+from category.serializers import CategoryPublicGeneral
 
 
 class CurrencyPublicSerializer(serializers.ModelSerializer):
@@ -16,6 +17,7 @@ class CampaingListSerializer(serializers.ModelSerializer):
     """serializer campaing just list"""
     tags = TagCampaingSerializer(many=True, read_only=True)
     currencies = CurrencyPublicSerializer()
+    category = CategoryPublicGeneral()
 
     class Meta:
         model = Campaing
