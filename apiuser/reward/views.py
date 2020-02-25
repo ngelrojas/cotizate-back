@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -26,7 +27,7 @@ class RewardViewSet(viewsets.ModelViewSet):
         queryset = Reward.objects.filter(
                 campaing=self.kwargs['pk']
         )
-        return queryset
+        return queryset 
 
     def perform_create(self, serializer):
         return serializer.save()
@@ -87,3 +88,23 @@ class RewardPublic(viewsets.ModelViewSet):
                 campaing=self.kwargs['pk']
         )
         return queryset
+
+
+class RewardRetrieve(viewsets.ModelViewSet):
+    """
+   retrieve:
+        get detail reward
+    """
+
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    queryset = Reward.objects.all()
+    serializer_class = serializers.RewardSerializer
+
+    def retrieve(self, request, pk):
+        current_reward = get_object_or_404(self.queryset, id=pk)
+        serializer = self.serializer_class(current_reward)
+        return Response(
+                {'data': serializer.data},
+                status=status.HTTP_200_OK
+        )
