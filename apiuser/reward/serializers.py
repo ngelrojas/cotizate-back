@@ -30,7 +30,7 @@ class RewardSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         """update data reward """
-        instance.name = validated_data.get(
+        instance.title = validated_data.get(
                 'title',
                 instance.title
         )

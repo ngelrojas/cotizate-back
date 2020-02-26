@@ -35,7 +35,7 @@ class RewardViewSet(viewsets.ModelViewSet):
     def update(self, request, pk=None):
         try:
             current_rewards = Reward.objects.get(
-                    campaing=request.data.get('campaing')
+                    id=request.data.get('reward_id')
             )
             serializer = self.serializer_class(
                     current_rewards,
