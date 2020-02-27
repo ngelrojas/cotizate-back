@@ -54,5 +54,9 @@ class RewardSerializer(serializers.ModelSerializer):
                 'description',
                 instance.description
         )
+        instance.currencies = validated_data.get(
+                'currencies',
+                instance.currencies
+        )
         instance.save()
         return instance
