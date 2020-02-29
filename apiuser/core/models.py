@@ -121,6 +121,23 @@ class CategoryCampaing(models.Model):
         return self.name
 
 
+class Raised(models.Model):
+    amount = models.DecimalField(
+            max_digits=9,
+            decimal_places=2,
+            default=0.00
+    )
+    before_amount = models.DecimalField(
+            max_digits=9,
+            decimal_places=2,
+            default=0.00
+    )
+    count = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.amount
+
+
 class Campaing(models.Model):
     STATUS_CAMPAING = (
             (0, 'begin'),
@@ -164,6 +181,10 @@ class Campaing(models.Model):
     )
     category = models.ForeignKey(
             CategoryCampaing,
+            on_delete=models.CASCADE
+    )
+    raised = models.ForeignKey(
+            Raised,
             on_delete=models.CASCADE
     )
 

@@ -61,6 +61,7 @@ APPS_API = [
     'newscampaing',
     'comment',
     'currency',
+    'raised',
 ]
 
 INSTALLED_APPS = APPS_LOCAL + APPS_THIRDPARTY + APPS_API

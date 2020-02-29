@@ -49,4 +49,5 @@ urlpatterns = [
     path('api/v1/', include('newscampaing.urls')),
     path('api/v1/', include('comment.urls')),
     path('api/v1/', include('currency.urls')),
+    path('api/v1/', include('raised.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
