@@ -1,2 +1,5 @@
-# crud_user_advanced
-crud user, send email confirmation, using rabbitMQ and celery
+# crowfounding
+## tools development
+## Django
+## rabbitMQ and celery
+## documentation in swagger
