@@ -40,9 +40,6 @@ class Command(BaseCommand):
             user_contributor_1 = User.objects.get(email='maricolucas@yopmail.com')
             user_contributor_2 = User.objects.get(email='marinalucas@yopmail.com')
             currency_one = Currency.objects.get(name='Bolivianos')
-            """get raised amount"""
-            reaised_one = Raised.objects.get(id=1)
-            raised_two = Raised.objects.get(id=2)
             """create tags"""
             tag_1 = TagCampaing.objects.create(
                    name='python'
@@ -74,8 +71,7 @@ class Command(BaseCommand):
                    is_complete=False,
                    user=user_creator_1,
                    currencies=currency_one,
-                   category=category_1,
-                   raised=reaised_one
+                   category=category_1
             )
             campaing_1.tags.add(tag_1, tag_3)
             campaing_2 = Campaing.objects.create(
@@ -98,7 +94,6 @@ class Command(BaseCommand):
                    user=user_creator_2,
                    currencies=currency_one,
                    category=category_2,
-                   raised=raised_two
             )
             campaing_2.tags.add(tag_2, tag_1)
             self.success('campaing created.')
