@@ -135,7 +135,7 @@ class Raised(models.Model):
     count = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.amount
+        return f'{self.amount}'
 
 
 class Campaing(models.Model):

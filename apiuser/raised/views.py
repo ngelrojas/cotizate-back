@@ -9,26 +9,23 @@ from raised.serializers import RaisedSerializer
 
 class RaisedPrivate(viewsets.ModelViewSet):
     """
+    retrieve:
+        get a raised details
     create:
         create a raised
+    update:
+        update a current raised
     """
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
     queryset = Raised.objects.all()
     serializer_class = RaisedSerializer
 
-    def perform_create(self, serializer):
-        return serializer.save()
-
-    def update(self, request, pk):
-        curernt_raised = Raised.objects.get(id=pk)
-        serializer = self.serializer_class(
-                curernt_raised,
-                data=request.data,
-                partial=True
-        )
+    def reatrieve(self, request, pk):
+        queryset = Raised.objects.get(id=pk)
+        current_raised = get_object_or_404(queryset, pk=pk)
+        serializer = self.serializer_class(current_raised)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
             return Response(
                     {'data': serializer.data},
                     status=status.HTTP_200_OK
@@ -37,3 +34,62 @@ class RaisedPrivate(viewsets.ModelViewSet):
                 {'error': 'error'},
                 status=status.HTTP_400_BAD_REQUEST
         )
+
+    def perform_create(self, serializer):
+        return serializer.save()
+
+    def update(self, request, pk=None):
+        try:
+            raised_id = request.data.get('raised_id')
+            current_raised = Raised.objects.get(id=raised_id)
+            serializer = self.serializer_class(
+                    current_raised,
+                    data=request.data,
+                    partial=True
+            )
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(
+                        {'data': serializer.data},
+                        status=status.HTTP_200_OK
+                )
+            return Response(
+                    {'error': 'error'},
+                    status=status.HTTP_400_BAD_REQUEST
+            )
+        except Raised.DoesNotExist as err:
+            return Response(
+                    {'error': f'{err}'},
+                    status=status.HTTP_400_BAD_REQUEST
+            )
+
+
+class RaisedPublic(viewsets.ModelViewSet):
+    """
+    retrieve:
+        get a detail public raised
+    """
+    # queryset = Raised.objects.all()
+    serializer_class = RaisedSerializer
+
+    def retrieve(self, request, pk):
+        try:
+            queryset_raised = Raised.objects.get(id=pk)
+            serializer = self.serializer_class(
+                    queryset_raised,
+                    data=request.data
+            )
+            if serializer.is_valid(raise_exception=True):
+                return Response(
+                        {'data': serializer.data},
+                        status=status.HTTP_200_OK
+                )
+            return Response(
+                    {'error': 'error'},
+                    status=status.HTTP_400_BAD_REQUEST
+            )
+        except Raised.DoesNotExist as err:
+            return Response(
+                    {'error': f'{err}'},
+                    status=status.HTTP_400_BAD_REQUEST
+            )
