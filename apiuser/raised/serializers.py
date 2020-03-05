@@ -10,7 +10,7 @@ class RaisedSerializer(serializers.ModelSerializer):
                 'id',
                 'amount',
                 'before_amount',
-                'count',
+                'count'
         )
 
     def addraised(self, instance, validated_data):
