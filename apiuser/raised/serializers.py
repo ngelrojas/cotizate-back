@@ -10,6 +10,19 @@ class RaisedSerializer(serializers.ModelSerializer):
                 'id',
                 'amount',
                 'before_amount',
+                'count',
+                'campaing'
+        )
+
+
+class RaisedSeCreate(serializers.ModelSerializer):
+
+    class Meta:
+        model = Raised
+        fields = (
+                'id',
+                'amount',
+                'before_amount',
                 'count'
         )
 

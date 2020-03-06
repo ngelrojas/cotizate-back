@@ -4,7 +4,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from core.models import Raised
-from raised.serializers import RaisedSerializer
+from raised import serializers
 
 
 class RaisedPrivate(viewsets.ModelViewSet):
@@ -19,12 +19,13 @@ class RaisedPrivate(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
     queryset = Raised.objects.all()
-    serializer_class = RaisedSerializer
+    serializer_class = serializers.RaisedSerializer
+    create_serializer = serializers.RaisedSeCreate
 
     def retrieve(self, request, pk):
         try:
             current_raised = Raised.objects.get(campaing=pk)
-            serializer = self.serializer_class(
+            serializer = self.create_serializer(
                         current_raised,
                         data=request.data
             )
@@ -49,7 +50,7 @@ class RaisedPrivate(viewsets.ModelViewSet):
         try:
             raised_id = request.data.get('raised_id')
             current_raised = Raised.objects.get(id=raised_id)
-            serializer = self.serializer_class(
+            serializer = self.create_serializer(
                     current_raised,
                     data=request.data,
                     partial=True
@@ -76,7 +77,7 @@ class RaisedPublic(viewsets.ModelViewSet):
         get a detail public raised
     """
     # queryset = Raised.objects.all()
-    serializer_class = RaisedSerializer
+    serializer_class = serializers.RaisedSeCreate
 
     def retrieve(self, request, pk):
         try:
