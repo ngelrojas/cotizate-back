@@ -29,14 +29,12 @@ urlpatterns = [
         'put': 'update'}),
         name='biography'
     ),
-    path('me/password-update/', 
-        views.PasswordUpdate.as_view({
+    path('me/password-update/', views.PasswordUpdate.as_view({
             'put': 'update'
         }),
         name='password-update'
     ),
-    path('biography/complete-bio/', 
-        view_bio.BiographyComplete.as_view({
+    path('biography/complete-bio/', view_bio.BiographyComplete.as_view({
             'get': 'retrieve'
         }),
         name='complete-biography'

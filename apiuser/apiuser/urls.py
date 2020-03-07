@@ -35,9 +35,15 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    re_path(r'^api/v1/cotizate-doc(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    re_path(r'^api/v1/cotizate-doc/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    re_path(r'^api/v1/cotizatedoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    re_path(r'^api/v1/cotizate-doc(?P<format>\.json|\.yaml)$',
+            schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    re_path(r'^api/v1/cotizate-doc/$',
+            schema_view.with_ui('swagger',
+                                cache_timeout=0),
+            name='schema-swagger-ui'),
+    re_path(r'^api/v1/cotizatedoc/$',
+            schema_view.with_ui('redoc', cache_timeout=0),
+            name='schema-redoc'),
     path('admin/', admin.site.urls),
     path('api/v1/user/', include('user.urls')),
     path('api/v1/', include('tag.urls')),

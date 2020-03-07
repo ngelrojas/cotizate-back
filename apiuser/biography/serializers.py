@@ -134,7 +134,10 @@ class BiographySerializer(serializers.ModelSerializer):
 
 
 class BiographyCompleteSerializer(serializers.ModelSerializer):
+    """
+    class biography
+    """
 
-        class Meta:
-                model = Biography
-                fields = ('is_complete',)
+    class Meta:
+        model = Biography
+        fields = ('is_complete', )

@@ -58,4 +58,4 @@ class CategoryPublicGeneral(serializers.ModelSerializer):
 
     class Meta:
         model = CategoryCampaing
-        fields = ('id', 'name',)
+        fields = ('id', 'name', )

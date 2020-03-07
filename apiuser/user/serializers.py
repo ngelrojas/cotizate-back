@@ -160,5 +160,4 @@ class PasswordRecoveryConfirmSerializer(serializers.Serializer):
         """validation data password and password confirm"""
         if attrs.get('password') != attrs.get('password_confirmation'):
             raise serializers.ValidationError("Those passwords don't match")
-
         return attrs

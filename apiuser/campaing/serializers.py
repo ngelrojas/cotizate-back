@@ -1,4 +1,3 @@
-from django.utils.timezone import now
 from rest_framework import serializers
 from core.models import Campaing, Currency, TagCampaing
 from tag.serializers import TagCampaingSerializer
@@ -100,7 +99,6 @@ class CampaingSerializerPublic(serializers.ModelSerializer):
                 'website',
                 'video',
                 'excerpt',
-                'description',
                 'tags',
                 'currencies',
                 'category',
