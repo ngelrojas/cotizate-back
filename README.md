@@ -2,16 +2,16 @@
 
 # crowfounding
 
-# tools development
+## tools development
 
-# Django
+- Django
 
-# rabbitMQ and celery
+- rabbitMQ and celery
 
-# documentation in swagger
+- documentation in swagger
 
-# Database postgres for localhost
+- Database postgres for localhost
 
-# Database postgres in AWS-RDS
+- Database postgres in AWS-RDS
 
-# Docker and docker compose
+- Docker and docker compose
