@@ -7,4 +7,4 @@ class TagCampaingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TagCampaing
-        fields = ('id', 'name',)
+        fields = ('id', 'name', 'slug', )

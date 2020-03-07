@@ -32,30 +32,33 @@ class Command(BaseCommand):
 
         with transaction.atomic():
             """get a categories"""
-            category_1 = CategoryCampaing.objects.get(name='Art')
-            category_2 = CategoryCampaing.objects.get(name='Technology')
+            category_1 = CategoryCampaing.objects.get(id=1)
+            category_2 = CategoryCampaing.objects.get(id=2)
             """get users"""
             user_creator_1 = User.objects.get(email='jhondoe@yopmail.com')
             user_creator_2 = User.objects.get(email='merydoe@yopmail.com')
             user_contributor_1 = User.objects.get(email='maricolucas@yopmail.com')
             user_contributor_2 = User.objects.get(email='marinalucas@yopmail.com')
-            currency_one = Currency.objects.get(name='Bolivianos')
+            currency_one = Currency.objects.get(id=1)
             """create tags"""
             tag_1 = TagCampaing.objects.create(
-                   name='python'
+                   name='Innovacion',
+                   slug='innovacion'
             )
             tag_2 = TagCampaing.objects.create(
-                    name='javascript'
+                    name='Nueva Tecnologia',
+                    slug='nueva-tecnologia'
             )
             tag_3 = TagCampaing.objects.create(
-                    name='clojure'
+                    name='Emprendiendo',
+                    slug='emprendiendo'
             )
             self.success('tags created')
             """create campaing"""
             campaing_1 = Campaing.objects.create(
                    title='first campaing',
                    slug='first-campaing',
-                   city='santa cruz',
+                   city='Bolivia Santa Cruz',
                    budget=100,
                    qty_days=50,
                    facebook='facebook.com/firts1',
@@ -77,7 +80,7 @@ class Command(BaseCommand):
             campaing_2 = Campaing.objects.create(
                    title='second campaing',
                    slug='second-campaing',
-                   city='la paz',
+                   city='Bolivia La Paz',
                    budget=300,
                    qty_days=50,
                    facebook='facebook.com/firts2',

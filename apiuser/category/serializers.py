@@ -12,6 +12,7 @@ class CampaingPublicSerializer(serializers.ModelSerializer):
         fields = (
                 'id',
                 'title',
+                'slug',
                 'city',
                 'budget',
                 'qty_days',
@@ -40,7 +41,7 @@ class CategoryCampaingSerializer(serializers.ModelSerializer):
     class Meta:
         depth = 1
         model = CategoryCampaing
-        fields = ('id', 'name', 'campaing',)
+        fields = ('id', 'name', 'campaing', 'slug', )
         read_only_fields = ('id',)
 
 
@@ -51,11 +52,11 @@ class CategoryPublicSerializer(serializers.ModelSerializer):
     class Meta:
         depth = 1
         model = CategoryCampaing
-        fields = ('id', 'name', 'campaing',)
+        fields = ('id', 'name', 'campaing', 'slug', )
 
 
 class CategoryPublicGeneral(serializers.ModelSerializer):
 
     class Meta:
         model = CategoryCampaing
-        fields = ('id', 'name', )
+        fields = ('id', 'name', 'slug', )

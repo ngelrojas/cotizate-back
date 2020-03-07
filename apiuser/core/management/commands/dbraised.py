@@ -5,7 +5,7 @@ from core.models import Raised, Campaing
 
 
 class Command(BaseCommand):
-    help = 'create currencies'
+    help = 'create raised'
 
     def success(self, message):
         return self.stdout.write(

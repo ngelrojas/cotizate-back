@@ -31,9 +31,11 @@ class Command(BaseCommand):
         with transaction.atomic():
             """create currencies"""
             currency_one = CategoryCampaing.objects.create(
-                    name='Art'
+                    name='Art',
+                    slug='art'
             )
             currency_two = CategoryCampaing.objects.create(
-                    name='Technology'
+                    name='Technology',
+                    slug='techonogy'
             )
             self.success('categories created.')

@@ -101,6 +101,7 @@ class Biography(models.Model):
 
 class TagCampaing(models.Model):
     name = models.CharField(max_length=255, blank=True)
+    slug = AutoSlugField(populate_from='name', always_update=True)
 
     def __str__(self):
         return self.name
@@ -116,6 +117,7 @@ class Currency(models.Model):
 
 class CategoryCampaing(models.Model):
     name = models.CharField(max_length=255, blank=True)
+    slug = AutoSlugField(populate_from='name', always_update=True)
 
     def __str__(self):
         return self.name
