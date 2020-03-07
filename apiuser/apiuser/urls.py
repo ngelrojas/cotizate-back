@@ -36,16 +36,15 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     re_path(r'^api/v1/cotizate-doc(?P<format>\.json|\.yaml)$',
-        schema_view.without_ui(cache_timeout=0),
-        name='schema-json'
+        schema_view.without_ui(cache_timeout=0), name='schema-json'
     ),
     re_path(r'^api/v1/cotizate-doc/$',
-        schema_view.with_ui('swagger', cache_timeout=0),
-        name='schema-swagger-ui'
+        schema_view.with_ui('swagger',
+            cache_timeout=0
+        ), name='schema-swagger-ui'
     ),
     re_path(r'^api/v1/cotizatedoc/$',
-        schema_view.with_ui('redoc', cache_timeout=0),
-        name='schema-redoc'
+        schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'
     ),
     path('admin/', admin.site.urls),
     path('api/v1/user/', include('user.urls')),
@@ -59,6 +58,4 @@ urlpatterns = [
     path('api/v1/', include('comment.urls')),
     path('api/v1/', include('currency.urls')),
     path('api/v1/', include('raised.urls')),
-] + static(settings.STATIC_URL,
-        document_root=settings.STATIC_ROOT
-    )
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

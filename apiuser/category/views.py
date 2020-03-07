@@ -60,12 +60,8 @@ class CategoryPublic(
         )
 
 
-class CategoryPublicGeneral(
-        viewsets.GenericViewSet,
-        mixins.ListModelMixin):
-       """
-        class category public general
-        """
+class CategoryPublicGeneral(viewsets.GenericViewSet, mixins.ListModelMixin):
+       """class category public general"""
        serializer_class = serializers.CategoryPublicGeneral
        queryset = CategoryCampaing.objects.all()
 
