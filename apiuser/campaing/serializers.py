@@ -2,6 +2,7 @@ from rest_framework import serializers
 from core.models import Campaing, Currency, TagCampaing
 from tag.serializers import TagCampaingSerializer
 from category.serializers import CategoryPublicGeneral
+from user.serializers import UserSerializerRetrieve
 
 
 class CurrencyPublicSerializer(serializers.ModelSerializer):
@@ -83,6 +84,8 @@ class CampaingSerializerPublic(serializers.ModelSerializer):
     """campaing serializer public"""
     tags = TagCampaingSerializer(many=True, read_only=True)
     currencies = CurrencyPublicSerializer()
+    category = CategoryPublicGeneral()
+    user = UserSerializerRetrieve()
 
     class Meta:
         model = Campaing
@@ -97,6 +100,7 @@ class CampaingSerializerPublic(serializers.ModelSerializer):
                 'tags',
                 'currencies',
                 'category',
+                'user',
         )
 
         read_only_fields = ('id',)
