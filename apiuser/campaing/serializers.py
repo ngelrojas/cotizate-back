@@ -90,6 +90,7 @@ class CampaingSerializerPublic(serializers.ModelSerializer):
     class Meta:
         model = Campaing
         fields = (
+                'id',
                 'title',
                 'slug',
                 'city',
