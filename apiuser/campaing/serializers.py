@@ -99,7 +99,6 @@ class CampaingSerializerPublic(serializers.ModelSerializer):
                 'website',
                 'video',
                 'excerpt',
-                'description',
                 'tags',
                 'currencies',
                 'category',
