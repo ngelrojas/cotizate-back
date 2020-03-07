@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -65,7 +64,7 @@ class RaisedPrivate(viewsets.ModelViewSet):
                     {'error': 'error'},
                     status=status.HTTP_400_BAD_REQUEST
             )
-        except Raised.DoesNotExist as err:
+        except Raised.DoesNotExist:
             return Response(
                     status=status.HTTP_400_BAD_REQUEST
             )
@@ -95,7 +94,7 @@ class RaisedPublic(viewsets.ModelViewSet):
                     {'error': 'error'},
                     status=status.HTTP_400_BAD_REQUEST
             )
-        except Raised.DoesNotExist as err:
+        except Raised.DoesNotExist:
             return Response(
                     status=status.HTTP_404_NOT_FOUND
             )

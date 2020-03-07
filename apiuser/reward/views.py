@@ -27,7 +27,7 @@ class RewardViewSet(viewsets.ModelViewSet):
         queryset = Reward.objects.filter(
                 campaing=self.kwargs['pk']
         )
-        return queryset 
+        return queryset
 
     def perform_create(self, serializer):
         return serializer.save()

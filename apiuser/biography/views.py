@@ -55,13 +55,13 @@ class BiographyView(viewsets.ViewSet):
 
 
 class BiographyComplete(viewsets.ViewSet):
-        serializer_class = BiographyCompleteSerializer
-        authentication_classes = (TokenAuthentication,)
-        permission_classes = (IsAuthenticated,)
+    serializer_class = BiographyCompleteSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
 
-        def retrieve(self, request, pk=None):
-                queryset = Biography.objects.get(
-                        user=request.user
-                )
-                serializer = BiographyCompleteSerializer(queryset)
-                return Response(serializer.data)
+    def retrieve(self, request, pk=None):
+        queryset = Biography.objects.get(
+                user=request.user
+        )
+        serializer = BiographyCompleteSerializer(queryset)
+        return Response(serializer.data)

@@ -33,10 +33,6 @@ class ManageUserView(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = User.objects.all()
 
-    # def get_object(self):
-        # """retrieve and return authentication user"""
-        # return self.request.user
-
     def retrieve(self, request, pk=None):
         queryset = User.objects.get(id=request.user.id)
         serializer = self.serializer_class_re(queryset)
@@ -152,7 +148,7 @@ class PasswordUpdate(viewsets.ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        current_user = User.objects.get(id=request.user.id)        
+        current_user = User.objects.get(id=request.user.id)
         current_user.set_password(request.data.get('password'))
         current_user.save()
 

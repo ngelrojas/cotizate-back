@@ -26,7 +26,7 @@ urlpatterns = [
             name='category-campaing'
         ),
         path('category/public/general', views.CategoryPublicGeneral.as_view({
-            'get': 'list'
-        }),
-        name='category-public-general')
+            'get': 'list'}),
+            name='category-public-general'
+        ),
 ]

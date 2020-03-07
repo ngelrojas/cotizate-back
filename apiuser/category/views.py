@@ -63,8 +63,12 @@ class CategoryPublic(
 class CategoryPublicGeneral(
         viewsets.GenericViewSet,
         mixins.ListModelMixin):
-        serializer_class = serializers.CategoryPublicGeneral
-        queryset = CategoryCampaing.objects.all()
+       """
+        class category public general
+        """
+       serializer_class = serializers.CategoryPublicGeneral
+       queryset = CategoryCampaing.objects.all()
 
-        def get_queryset(self):
-            return self.queryset.order_by('name')
+       def get_queryset(self):
+           """list all categories public"""
+           return self.queryset.order_by('name')
