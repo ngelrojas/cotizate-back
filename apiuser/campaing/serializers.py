@@ -18,6 +18,7 @@ class CampaingListSerializer(serializers.ModelSerializer):
     tags = TagCampaingSerializer(many=True, read_only=True)
     currencies = CurrencyPublicSerializer()
     category = CategoryPublicGeneral()
+    user = UserSerializerRetrieve()
 
     class Meta:
         model = Campaing
@@ -42,6 +43,7 @@ class CampaingListSerializer(serializers.ModelSerializer):
                 'tags',
                 'currencies',
                 'category',
+                'user',
         )
 
 
