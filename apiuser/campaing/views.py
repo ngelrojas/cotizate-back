@@ -25,7 +25,6 @@ class CampaingViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Campaing.objects.all()
     serializer_class = serializers.CampaingSerializer
-    campaing_created = 1
 
     def list(self, request):
         queryset = Campaing.objects.filter(user=request.user)
@@ -55,7 +54,6 @@ class CampaingViewSet(viewsets.ModelViewSet):
             current_user = Campaing.objects.get(
                     user=request.user,
                     id=request.data.get('id'),
-                    status_campaing=self.campaing_created
             )
             serializer = self.serializer_class(
                     current_user,
@@ -77,10 +75,8 @@ class CampaingViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, pk=None):
         try:
-            status_public = 2
             current_campaing = Campaing.objects.get(
                     id=request.data.get('id'),
-                    status_campaing=status_public
             )
             current_campaing.is_enabled = False
             current_campaing.save()
