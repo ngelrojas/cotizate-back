@@ -164,8 +164,8 @@ USE_TZ = True
 STATIC_URL = '/staticfiles/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 AUTH_USER_MODEL = 'core.User'
-# URL_PRODUCTION = 'http://www.cotizate.com'
-URL_PRODUCTION = 'http://localhost:3000'
+URL_PRODUCTION = 'http://www.cotizate.com'
+# URL_PRODUCTION = 'http://localhost:3000'
 
 # CORS AND STUFF
 CORS_ALLOW_CREDENTIALS = False
