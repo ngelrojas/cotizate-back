@@ -7,7 +7,7 @@ celery
 django-smtp-ssl
 amqp==2.5.1
 django-cors-headers
-kombu==4.6.5
+kombu==5.0.0
 django-model-utils
 django-autoslug
 gunicorn
